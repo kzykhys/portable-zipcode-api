@@ -1,0 +1,26 @@
+{
+    "name": "kzykhys/portable-zip-api",
+    "description": "Find address from zip-code",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "Kazuyuki Hayashi",
+            "email": "hayashi@valnur.net"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "silex/silex": "1.0.*@dev",
+        "symfony/console": ">=2.1,<2.3-dev",
+        "symfony/finder": ">=2.1,<2.3-dev",
+        "symfony/serializer": ">=2.1,<2.3-dev",
+        "doctrine/dbal": ">=2.2.0,<2.4.0-dev",
+        "doctrine/orm": ">=2.2.0,<2.4.0-dev",
+        "kzykhys/php-csv-parser": "dev-master"
+    }
+}

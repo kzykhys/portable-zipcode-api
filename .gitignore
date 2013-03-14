@@ -1,0 +1,6 @@
+/vendor/
+/app/zip.sqlite.db
+/app/cache/*
+/build/*
+/csv/*
+*.phar
