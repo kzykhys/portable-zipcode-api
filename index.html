@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=640" />
+
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen"/>
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)"/>
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
+    <title>Portable-zipcode-api by kzykhys</title>
+  </head>
+
+  <body>
+    <a id="forkme_banner" href="https://github.com/kzykhys/portable-zipcode-api">View on GitHub</a>
+    <div class="shell">
+
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>Portable-zipcode-api</h1>
+            <h2>Easy, portable, self-hosting Japan postal code API</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
+
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/kzykhys/portable-zipcode-api/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/kzykhys/portable-zipcode-api/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
+      </section>
+
+
+      <span class="banner-fix"></span>
+
+
+      <section id="main_content">
+        <h1>Portable ZipCode API</h1>
+
+<p>Easy, portable, self-hosting Japan postal code API</p>
+
+<h2>Requirements</h2>
+
+<ul>
+<li>PHP5.3.3 or later</li>
+<li>SQLite support (maybe installed on default PHP build)</li>
+<li>Latest jQuery</li>
+</ul><h2>Installation</h2>
+
+<ul>
+<li>Download <a href="#">portable-zip-api.zip</a> or <a href="#">portable-zip-api.tar.gz</a> from kzykhys/portable-zip-api</li>
+<li>Extract archive</li>
+<li>Upload zip.phar.php and zip.sqlite.db to same directory on your web server (eg. <code>http://www.example.com/API/zip.phar.php</code>)</li>
+</ul><p>If you prefer clean URLs, you'll need mod_rewrite and .htaccess files like this:</p>
+
+<pre><code>&lt;IfModule mod_rewrite.c&gt;
+    RewriteEngine On
+    #RewriteBase /path/to/app
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ zip.phar.php [L]
+&lt;/IfModule&gt;
+</code></pre>
+
+<h2>API Reference</h2>
+
+<h3>General notes</h3>
+
+<ul>
+<li>Every string passed to and from the API needs to be UTF-8 encoded.</li>
+<li>You can rename <code>zip.phar.php</code> to anything you like.</li>
+</ul><hr><h3>
+<code>/version</code> Get version</h3>
+
+<h4>URL</h4>
+
+<pre><code>GET /zip.phar.php/version
+</code></pre>
+
+<h4>Return value</h4>
+
+<p>An object with mime type 'application/json'</p>
+
+<div class="highlight"><pre><span class="p">{</span>
+    <span class="nt">"version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span>
+<span class="p">}</span>
+</pre></div>
+
+<hr><h3>
+<code>/api</code> Get Javascript API</h3>
+
+<h4>URL</h4>
+
+<pre><code>GET /zip.phar.php/api
+</code></pre>
+
+<h4>Return value</h4>
+
+<p>The content of Javascript API with mime type 'text/javascript'</p>
+
+<hr><h3>
+<code>/search/{code}.{format}</code> Find an address by zip-code</h3>
+
+<h4>URL</h4>
+
+<pre><code>GET  /zip.phar.php/search/{code}
+GET  /zip.phar.php/search/{code}.{format}
+POST /zip.phar.php/search
+</code></pre>
+
+<h4>Arguments</h4>
+
+<ul>
+<li>
+<strong>code</strong> <em>(string/integer)</em> The code to search (9999999/999-9999)</li>
+<li>
+<strong>format</strong> <em>(string)</em> The format (json|xml|php) Default:json</li>
+</ul><h4>Return value</h4>
+
+<h5>Format: json</h5>
+
+<p>An object with mime type 'application/json'</p>
+
+<div class="highlight"><pre><span class="p">{</span>
+    <span class="nt">"result"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">"data"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"id"</span><span class="p">:</span>   <span class="s2">"38201"</span><span class="p">,</span>
+        <span class="nt">"code"</span><span class="p">:</span> <span class="s2">"1600022"</span><span class="p">,</span>
+        <span class="nt">"pref"</span><span class="p">:</span> <span class="s2">"\u6771\u4eac\u90fd"</span><span class="p">,</span>
+        <span class="nt">"city"</span><span class="p">:</span> <span class="s2">"\u65b0\u5bbf\u533a"</span><span class="p">,</span>
+        <span class="nt">"town"</span><span class="p">:</span> <span class="s2">"\u65b0\u5bbf"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<h4>Format: xml</h4>
+
+<p>A xml document with mime type 'application/xml'</p>
+
+<div class="highlight"><pre><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<span class="nt">&lt;response&gt;</span>
+    <span class="nt">&lt;result&gt;</span>1<span class="nt">&lt;/result&gt;</span>
+    <span class="nt">&lt;data&gt;</span>
+        <span class="nt">&lt;id&gt;</span>38201<span class="nt">&lt;/id&gt;</span>
+        <span class="nt">&lt;code&gt;</span>1600022<span class="nt">&lt;/code&gt;</span>
+        <span class="nt">&lt;pref&gt;</span><span class="ni">&amp;#x6771;&amp;#x4EAC;&amp;#x90FD;</span><span class="nt">&lt;/pref&gt;</span>
+        <span class="nt">&lt;city&gt;</span><span class="ni">&amp;#x65B0;&amp;#x5BBF;&amp;#x533A;</span><span class="nt">&lt;/city&gt;</span>
+        <span class="nt">&lt;town&gt;</span><span class="ni">&amp;#x65B0;&amp;#x5BBF;</span><span class="nt">&lt;/town&gt;</span>
+    <span class="nt">&lt;/data&gt;</span>
+<span class="nt">&lt;/response&gt;</span>
+</pre></div>
+
+<h5>Format: php</h5>
+
+<p>A PHP <a href="http://www.php.net/manual/en/function.serialize.php">serialized</a> string with mime type 'text/plain'</p>
+
+<pre><code>a:2:{s:6:"result";b:1;s:4:"data";a:5:{s:4:"city";s:9:"新宿区";s:4:"code";s:7:"1600022";s:2:"id";s:5:"38201";s:4:"pref";s:9:"東京都";s:4:"town";s:6:"新宿";}}
+</code></pre>
+
+<h2>JavaScript API</h2>
+
+<h3>Configure and Paste the code above</h3>
+
+<div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/path/to/zip.phar.php/api"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+
+<h3>Call the API through jQuery</h3>
+
+<div class="highlight"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">zipSearch</span><span class="p">(</span><span class="s1">'950-2014'</span><span class="p">).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">json</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">json</span><span class="p">.</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">json</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">pref</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">json</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">city</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">json</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">town</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Address not found for code: '</span> <span class="o">+</span> <span class="nx">json</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">code</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+
+<h2>Update address database</h2>
+
+<h3>Download full source code from repository</h3>
+
+<div class="highlight"><pre><span class="nv">$ </span>git clone https://github.com/kzykhys/portable-zipcode-api.git zipapi
+<span class="nv">$ </span><span class="nb">cd </span>zipapi
+</pre></div>
+
+<h3>Install dependencies via Composer</h3>
+
+<div class="highlight"><pre><span class="nv">$ </span>curl -sS https://getcomposer.org/installer | php
+<span class="nv">$ </span>php composer.phar install
+</pre></div>
+
+<h3>Download CSV (Lzh archive) from official website</h3>
+
+<p>Download lzh archive from <a href="http://www.post.japanpost.jp/zipcode/dl/kogaki.html">http://www.post.japanpost.jp/zipcode/dl/kogaki.html</a></p>
+
+<p>or just run</p>
+
+<div class="highlight"><pre><span class="nv">$ </span>php app/console.php csv:download
+</pre></div>
+
+<h3>Extract Lzh archive</h3>
+
+<p>If you have lha command, just type</p>
+
+<div class="highlight"><pre><span class="nv">$ </span>lha *.lzh
+</pre></div>
+
+<h3>Setup database</h3>
+
+<div class="highlight"><pre><span class="nv">$ </span>php app/console.php csv:import ./csv
+</pre></div>
+
+<h3>Rebuild phar archive</h3>
+
+<div class="highlight"><pre><span class="nv">$ </span>php app/console.php build:phar
+</pre></div>
+
+<h2>Author</h2>
+
+<p>Kazuyuki Hayashi (<a href="https://github.com/kzykhys" class="user-mention">@kzykhys</a>)</p>
+
+<h2>LICENSE</h2>
+
+<p>The MIT License</p>
+      </section>
+
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/kzykhys">kzykhys</a> can be found on <a href="https://github.com/kzykhys/portable-zipcode-api">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
+      </footer>
+
+    </div>
+
+    
+  </body>
+</html>
