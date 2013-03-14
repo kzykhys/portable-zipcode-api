@@ -1,6 +1,6 @@
 {
-    "name": "kzykhys/portable-zip-api",
-    "description": "Find address from zip-code",
+    "name": "kzykhys/portable-zipcode-api",
+    "description": "Easy, portable, self-hosting Japan postal code API",
     "minimum-stability": "stable",
     "authors": [
         {
