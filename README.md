@@ -13,7 +13,7 @@ Requirements
 Installation
 -------------------------------------------------------------------------------------------------------
 
-* Download [portable-zip-api.zip](#) or [portable-zip-api.tar.gz](#) from kzykhys/portable-zip-api
+* Download [portable-zip-api.zip](http://kzykhys.github.com/portable-zipcode-api/releases/portable-zip-api.zip)
 * Extract archive
 * Upload zip.phar.php and zip.sqlite.db to same directory on your web server (eg. `http://www.example.com/API/zip.phar.php`)
 
@@ -188,7 +188,8 @@ $ php app/console.php csv:download
 If you have lha command, just type
 
 ``` sh
-$ lha *.lzh
+$ cd ./csv
+$ find . -type f -exec lha x {} \;
 ```
 
 ### Setup database
