@@ -22,11 +22,16 @@ $app->boot();
 $console = new \Symfony\Component\Console\Application('kzykhys/zip-finder', '1.0.0');
 $console->getHelperSet()->set(new ConnectionHelper($app['db']), 'db');
 $console->getHelperSet()->set(new EntityManagerHelper($app['orm.em']), 'em');
+
+$createCommand = new CreateCommand();
+$updateCommand = new UpdateCommand();
+$dropCommand   = new DropCommand();
+
 $console->addCommands(
     array(
-        (new CreateCommand())->setName('doctrine:schema:create'),
-        (new UpdateCommand())->setName('doctrine:schema:update'),
-        (new DropCommand())->setName('doctrine:schema:drop'),
+        $createCommand->setName('doctrine:schema:create'),
+        $updateCommand->setName('doctrine:schema:update'),
+        $dropCommand->setName('doctrine:schema:drop'),
         new \KzykHys\ZipFinder\Command\CSV\ImportCommand($app),
         new \KzykHys\ZipFinder\Command\Build\PharCommand(),
         new \KzykHys\ZipFinder\Command\CSV\DownloadCommand(),

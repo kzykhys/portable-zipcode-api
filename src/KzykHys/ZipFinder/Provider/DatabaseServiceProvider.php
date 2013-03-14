@@ -47,9 +47,10 @@ class DatabaseServiceProvider implements ServiceProviderInterface
          * @return string
          */
         $app['orm.entity.path'] = $app->share(function () {
-            return [
-                dirname((new \ReflectionClass('\\KzykHys\\ZipFinder\\Entity\\Address'))->getFileName())
-            ];
+            $reflection = new \ReflectionClass('\\KzykHys\\ZipFinder\\Entity\\Address');
+            return array(
+                dirname($reflection->getFileName())
+            );
         });
 
         /**
