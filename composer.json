@@ -2,6 +2,7 @@
     "name": "kzykhys/portable-zipcode-api",
     "description": "Easy, portable, self-hosting Japan postal code API",
     "minimum-stability": "stable",
+    "license": "MIT",
     "authors": [
         {
             "name": "Kazuyuki Hayashi",
