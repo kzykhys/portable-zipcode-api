@@ -3,6 +3,11 @@ Portable ZipCode API
 
 Easy, portable, self-hosting Japan postal code API
 
+Live Example
+-------------------------------------------------------------------------------------------------------
+
+[Try the demo!](http://zipapi.pagodabox.com/)
+
 Requirements
 -------------------------------------------------------------------------------------------------------
 
