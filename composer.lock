@@ -72,20 +72,20 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "2.3.2",
+            "version": "2.3.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/doctrine/dbal",
-                "reference": "2.3.2"
+                "url": "https://github.com/doctrine/dbal.git",
+                "reference": "2.3.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/doctrine/dbal/archive/2.3.2.zip",
-                "reference": "2.3.2",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/2.3.3",
+                "reference": "2.3.3",
                 "shasum": ""
             },
             "require": {
-                "doctrine/common": "2.3.*",
+                "doctrine/common": ">=2.3.0,<2.5-dev",
                 "php": ">=5.3.2"
             },
             "type": "library",
@@ -131,20 +131,20 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2013-01-07 20:03:43"
+            "time": "2013-03-24 19:16:29"
         },
         {
             "name": "doctrine/orm",
-            "version": "2.3.2",
+            "version": "2.3.3",
             "source": {
                 "type": "git",
-                "url": "git://github.com/doctrine/doctrine2.git",
-                "reference": "2.3.2"
+                "url": "https://github.com/doctrine/doctrine2.git",
+                "reference": "2.3.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/doctrine/doctrine2/archive/2.3.2.zip",
-                "reference": "2.3.2",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/2.3.3",
+                "reference": "2.3.3",
                 "shasum": ""
             },
             "require": {
@@ -201,7 +201,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2013-01-07 20:05:04"
+            "time": "2013-03-24 20:43:58"
         },
         {
             "name": "kzykhys/php-csv-parser",
@@ -209,12 +209,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kzykhys/PHPCsvParser.git",
-                "reference": "f478385d3cab48f0d6f906effa515430a47ab3e2"
+                "reference": "3c4628eff4f26a15483e1597e2c6678391dc5770"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kzykhys/PHPCsvParser/zipball/f478385d3cab48f0d6f906effa515430a47ab3e2",
-                "reference": "f478385d3cab48f0d6f906effa515430a47ab3e2",
+                "url": "https://api.github.com/repos/kzykhys/PHPCsvParser/zipball/3c4628eff4f26a15483e1597e2c6678391dc5770",
+                "reference": "3c4628eff4f26a15483e1597e2c6678391dc5770",
                 "shasum": ""
             },
             "require": {
@@ -237,7 +237,7 @@
                 }
             ],
             "description": "Convert CSV to array (Excel style is fully suppoted!)",
-            "time": "2013-03-12 08:39:03"
+            "time": "2013-03-22 16:13:28"
         },
         {
             "name": "pimple/pimple",
