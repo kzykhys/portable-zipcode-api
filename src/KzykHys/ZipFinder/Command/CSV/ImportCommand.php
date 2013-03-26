@@ -69,6 +69,9 @@ class ImportCommand extends Command
         /** @var EntityManager $em */
         $em = $this->app['orm.em'];
 
+        // Disable SQL Logger
+        $em->getConnection()->getConfiguration()->setSQLLogger(null);
+
         if (!$input->getOption('append')) {
             $output->writeln('Purging database');
             $em->getConnection()->executeUpdate("DELETE FROM address");
@@ -103,9 +106,8 @@ class ImportCommand extends Command
         $output->write('Loading records from ' . $path . ' ... ');
 
         $parser = CsvParser::fromFile($path);
-        $data = $parser->parse();
 
-        foreach ($data as $value) {
+        foreach ($parser as $value) {
             $address = new Address();
             $address->code = $value[2];
             $address->pref = $value[6];
@@ -118,6 +120,7 @@ class ImportCommand extends Command
         $parser = null;
 
         $em->flush();
+        $em->clear();
 
         $output->writeln('Done');
     }
