@@ -9,9 +9,11 @@
  * @author    Kazuyuki Hayashi <hayashi@valnur.net>
  */
 
+use Doctrine\ORM\NoResultException;
 use KzykHys\ZipFinder\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /** @var $app KzykHys\ZipFinder\Application */
 $app = require __DIR__ . '/app/bootstrap.php';
@@ -31,8 +33,36 @@ $app->get('/search/{code}', 'zip.controller:getSearchAction');
 $app->get('/search/{code}.{format}', 'zip.controller:getSearchAction')->bind('search_code');
 $app->post('/search', 'zip.controller:postSearchAction')->bind('search');
 
+$app->error(function (\InvalidArgumentException $e, $code) use ($app) {
+    return $app->json(array(
+        'result'  => false,
+        'reason'  => 400,
+        'message' => 'Bad Request'
+    ), 400);
+});
+
+$app->error(function (NoResultException $e, $code) use ($app) {
+    return $app->json(array(
+        'result'  => false,
+        'reason'  => 404,
+        'message' => 'No Results Found'
+    ), 404);
+});
+
+$app->error(function (HttpException $e, $code) use ($app) {
+    return $app->json(array(
+        'result'  => false,
+        'reason'  => $e->getStatusCode(),
+        'message' => $e->getMessage()
+    ), $e->getStatusCode());
+});
+
 $app->error(function (\Exception $e, $code) use ($app) {
-    return $app->json(array('result' => false, 'reason' => $code, 'message' => $e->getMessage()));
+    return $app->json(array(
+        'result'  => false,
+        'reason'  => 500,
+        'message' => 'Error:' . $code
+    ), 500);
 });
 
 $app->run();
