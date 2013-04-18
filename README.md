@@ -200,6 +200,7 @@ $ find . -type f -exec lha x {} \;
 ### Setup database
 
 ``` sh
+$ php app/console.php doctrine:schema:update --force
 $ php app/console.php csv:import ./csv
 ```
 
